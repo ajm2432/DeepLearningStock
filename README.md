@@ -34,11 +34,8 @@ The code plots the training history of the model to see how the training loss ev
 ### Usage
 
 1.  Make sure you have Python installed on your computer.
-2.  Save the code in a file named `train_model.py`.
-3.  Open a command prompt or terminal window and navigate to the directory where you saved the file.
-4.  Type the following command to run the code:
-
-css
+2.  Open a command prompt or terminal window and navigate to the directory where you saved the code.
+3.  Type the following command to run the code:
 
 `python train_model.py -s [stock symbol] -w [training window]`
 
@@ -50,9 +47,7 @@ For example, to train the model on Apple Inc. stock data with a training window 
 
 ### Flowchart
 
-sql
-
- `+-------------------+
+                                     `+-------------------+
                                       | Load Data         |
                                       +-------------------+
                                           |     |
