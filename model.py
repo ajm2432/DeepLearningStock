@@ -13,7 +13,7 @@ from keras.models import load_model
 from keras.layers import Dense, LSTM
 from keras.callbacks import EarlyStopping
 
-file_path = 'stock_price_prediction.h5'
+file_path = 'stock_ml_algorithims/stock_price_prediction.h5'
 directory = 'stock_symbol_data'
 
 class actions:
@@ -50,7 +50,10 @@ class actions:
 
         # Scale the stock price data to be between 0 and 1
         scaler = MinMaxScaler(feature_range=(0, 1))
+        print(df)
+        print(df[['Open','High']])
         df['Close'] = scaler.fit_transform(df['Close'].values.reshape(-1, 1))
+    
 
         # Convert the stock price data into a 3D array for use with an LSTM network
         def create_inputs(df, look_back=1):
@@ -102,7 +105,7 @@ class actions:
         #Plot the actual vs predicted stock prices on the validation set
         plt.figure(3)
         plt.plot(scaler.inverse_transform(y_val.reshape(-1, 1)), label='Actual')
-        plt.plot(scaler.inverse_transform(val_predictions), label='Predicted')
+        plt.plot(scaler.inverse_transform(val_predictions.reshape(-1, 1)), label='Predicted')
         plt.title('Actual vs Predicted Stock Prices')
         plt.xlabel('Date')
         plt.ylabel('Price')
@@ -155,5 +158,4 @@ class actions:
         # Invert the scaled predictions to get the actual stock prices
         predictions = scaler.inverse_transform(np.array(predictions).reshape(-1, 1))
         last_30_days = scaler.inverse_transform(np.array(latest_data).reshape(-1, 1))
-        print(last_30_days)
-        return predictions, last_30_days
+        return predictions[:,0]
